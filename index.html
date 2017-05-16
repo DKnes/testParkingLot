@@ -129,6 +129,11 @@
 			});
 
 		}
+		function pushToServer(){
+			$.get(rootpath+"getInstruct.php?data="+document.getElementById("userans").value,function(data,status){
+				;
+			});
+		}
 		//var t1=window.setInterval("hello()",5000);
 		//var t2 = window.setInterval("getdata()", 1500);
 		var newauto = window.setInterval("refresh()", 1500);
@@ -289,10 +294,30 @@
 			</div>
 		</div>
 
+
+		<!--<div class="container">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div>
+
+					<label for="ins">Input:</label>
+					<input type="text">
+					<button class="btn btn-default" onclick="">tijiao</button>
+				</div>
+			</div>
+		</div>-->
+		<div style="padding-left:20px;padding-right:20px;">
+		<div class="form-group">
+			<label for="name">指令</label>
+			<input required name="ans" type="text" class="form-control" id="userans" placeholder="请输入指令">
+		</div>
+
+		<button onclick="pushToServer()" type="submit" class="btn btn-default">提交</button>
+		</div>
 		<div>
+			<!--<br>
 			<br>
-			<br>
-			<br>
+			<br>-->
 			<footer>
 				<blockquote class="pull-right">
 					xby创新小站出品
