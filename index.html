@@ -57,8 +57,8 @@
 
 				alldata = alldata + 1;
 				var mytable = document.getElementById("intable");
-				if(alldata>1){
-					mytable.rows[1].setAttribute("style","");
+				if (alldata > 1) {
+					mytable.rows[1].setAttribute("style", "");
 				}
 				var newrow = mytable.insertRow(1);
 				var newtime = newrow.insertCell();
@@ -69,10 +69,10 @@
 				if (alldata >= 5) {
 					mytable.deleteRow(5);
 				}
-				mytable.rows[1].setAttribute("style","background-color:yellow;");
+				mytable.rows[1].setAttribute("style", "background-color:yellow;");
 				var mytable = document.getElementById("outtable");
-								if(alldata>1){
-					mytable.rows[1].setAttribute("style","");
+				if (alldata > 1) {
+					mytable.rows[1].setAttribute("style", "");
 				}
 				var newrow = mytable.insertRow(1);
 				var newtime = newrow.insertCell();
@@ -85,12 +85,53 @@
 				if (alldata >= 5) {
 					mytable.deleteRow(5);
 				}
-				mytable.rows[1].setAttribute("style","background-color:red;");
+				mytable.rows[1].setAttribute("style", "background-color:red;");
 				//alert("数据: " + data + "\n状态: " + status);
 			});
 		}
+		window.rootpath = "http://localhost/parkinglot/";
+		function refresh() {
+			//alert("heh");
+			$.get(rootpath + "getLot.php", function (data, status) {
+				// alert("jeh");
+				var obj = eval('(' + data + ')');
+				//alert(data);
+				for (var i = 0; i < 6; i++) {
+					//alert(obj[i]);
+					var mytd = document.getElementById("lot" + i);
+					if (obj[i] == "0") mytd.innerHTML = "无车";
+					else mytd.innerHTML = "有车";
+				}
+			});
+			$.get(rootpath + "getGetCar.php", function (data, status) {
+				//alert("123");
+				var obj = eval('(' + data + ')');
+				//alert(obj);
+				for (var i = 0; i < 4; i++) {
+					var mytr = document.getElementById("get" + i).children;
+					//childNodes!
+					mytr[0].innerHTML = obj[i];
+					mytr[1].innerHTML = "A";
+					mytr[2].innerHTML = "已经取走车";
+				}
+			});
+			$.get(rootpath + "getCarCame.php", function (data, status) {
+				//alert("123");
+				var obj = eval('(' + data + ')');
+				//alert(obj);
+				for (var i = 0; i < 4; i++) {
+					var mytr = document.getElementById("came" + i).children;
+					//childNodes!
+					mytr[0].innerHTML = obj[i];
+					mytr[1].innerHTML = "A";
+					//mytr[2].innerHTML = "已经取走车";
+				}
+			});
+
+		}
 		//var t1=window.setInterval("hello()",5000);
-		var t2 = window.setInterval("getdata()", 1500);
+		//var t2 = window.setInterval("getdata()", 1500);
+		var newauto = window.setInterval("refresh()", 1500);
 		//window.clearInterval(t1);
 		function jumpToRank() {
 			//self.location = "http://www.baidu.com";
@@ -108,7 +149,7 @@
 			padding-left: 2px;
 			text-align: left;
 		}
-		
+
 		#demo a:hover {
 			color: #ff6600;
 		}
@@ -135,22 +176,22 @@
 						</caption>
 						<tbody>
 							<tr>
-								<th>车位编号</th>
-								<th>A</th>
-								<th>B</th>
-								<th>C</th>
-								<th>D</th>
-								<th>E</th>
-								<th>F</th>
+								<th width="10%">车位编号</th>
+								<th width="15%">A</th>
+								<th width="15%">B</th>
+								<th width="15%">C</th>
+								<th width="15%">D</th>
+								<th width="15%">E</th>
+								<th width="15%">F</th>
 							</tr>
 							<tr>
 								<td></td>
-								<td id="lota">空</td>
-								<td id="lotb">有车</td>
-								<td id="lotc">有车</td>
-								<td id="lotd">空</td>
-								<td id="lote">有车</td>
-								<td id="lotf">空</td>
+								<td id="lot0">空</td>
+								<td id="lot1">有车</td>
+								<td id="lot2">有车</td>
+								<td id="lot3">空</td>
+								<td id="lot4">有车</td>
+								<td id="lot5">空</td>
 							</tr>
 						</tbody>
 					</table>
@@ -191,6 +232,23 @@
 								<th width="35%">time</th>
 								<th>data</th>
 							</tr>
+							<tr id="came0" style="background-color:yellow">
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="came1">
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="came2">
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="came3">
+								<td></td>
+								<td></td>
+							</tr>
+
 						</tbody>
 					</table>
 				</div>
@@ -204,6 +262,26 @@
 								<th width="33%">时间</th>
 								<th width="33%">车位</th>
 								<th>详细信息</th>
+							</tr>
+							<tr id="get0" style="background-color:red">
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="get1">
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="get2">
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr id="get3">
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</tbody>
 					</table>
