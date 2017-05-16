@@ -1,0 +1,9 @@
+<?php
+	error_reporting(0);
+	$dataReceive=$_GET["data"];
+	$dataReceiveFileName="getInstruct.json";
+	$jsonData=array("data"=>$dataReceive,"flag"=>0);
+	$dataReceiveFile=fopen($dataReceiveFileName,"w");
+	fwrite($dataReceiveFile,json_encode($jsonData));
+	fclose($dataReceiveFile);
+?>
