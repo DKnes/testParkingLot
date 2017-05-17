@@ -1,7 +1,16 @@
 <?php
-    $filename="lotdata.json";
-    $arr=Array(($_GET['1']),$_GET['2'],$_GET['3'],
-    $_GET['4'],$_GET['5'],$_GET['6']);
-    $file=fopen($filename,'w');
-    fwrite($file,json_encode($arr));
+    $fileName="lotdata.json";
+    if(file_exists($fileName))
+        $dataJson=file_get_contents($fileName);
+    else
+        $dataJson=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0);
+
+    $dataJson=json_decode($dataJson,true);
+    $lotNum=(int)$_GET['0'];//From 0 to 7
+    $lotHasCar=(int)$_GET['1'];//0:false 1:true
+    //echo $lotNum; echo $lotHasCar;
+    $dataJson[$lotNum]=$lotHasCar;
+    echo json_encode($dataJson);
+    $file=fopen($fileName,'w');
+    fwrite($file,json_encode($dataJson));
     fclose($file);

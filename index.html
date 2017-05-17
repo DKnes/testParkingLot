@@ -13,6 +13,11 @@
 	<script src="http://123.206.93.234/app/responser/bootstrap.min.js"></script>
 	<script src="http://123.206.93.234/app/responser/myjs.js"></script>
 	<script>
+        function nonote(){
+			
+			var mytext=document.getElementById("note");
+			mytext.setAttribute("style","display:none");
+		}
 		window.alldata = 0;
 		// $(document).ready(function () {
 		// 	$("button").click(function () {
@@ -89,17 +94,18 @@
 				//alert("数据: " + data + "\n状态: " + status);
 			});
 		}
-		window.rootpath = "http://localhost/parkinglot/";
+		//window.rootpath = "http://139.199.118.226/Xby/";
+		window.rootpath="http://localhost/testParkingLot/"
 		function refresh() {
 			//alert("heh");
 			$.get(rootpath + "getLot.php", function (data, status) {
 				// alert("jeh");
 				var obj = eval('(' + data + ')');
 				//alert(data);
-				for (var i = 0; i < 6; i++) {
+				for (var i = 0; i < 8; i++) {
 					//alert(obj[i]);
 					var mytd = document.getElementById("lot" + i);
-					if (obj[i] == "0") mytd.innerHTML = "无车";
+					if (obj[i] == "0.0000") mytd.innerHTML = "无车";
 					else mytd.innerHTML = "有车";
 				}
 			});
@@ -110,8 +116,10 @@
 				for (var i = 0; i < 4; i++) {
 					var mytr = document.getElementById("get" + i).children;
 					//childNodes!
-					mytr[0].innerHTML = obj[i];
-					mytr[1].innerHTML = "A";
+					mytr[0].innerHTML = obj[i][0];
+					//if(obj[i][1]!=null)mytr[1].innerHTML = String.fromCharCode(65+parseInt(obj[i][1]));
+					if(obj[i][1]!=null)mytr[1].innerHTML = obj[i][1]; 
+				else	 mytr[1].innerHTML = "A"; 
 					mytr[2].innerHTML = "已经取走车";
 				}
 			});
@@ -122,8 +130,8 @@
 				for (var i = 0; i < 4; i++) {
 					var mytr = document.getElementById("came" + i).children;
 					//childNodes!
-					mytr[0].innerHTML = obj[i];
-					mytr[1].innerHTML = "A";
+					mytr[0].innerHTML = obj[i][0];
+					mytr[1].innerHTML = "京A"+obj[i][1];
 					//mytr[2].innerHTML = "已经取走车";
 				}
 			});
@@ -188,13 +196,15 @@
 						</caption>
 						<tbody>
 							<tr>
-								<th width="10%">车位编号</th>
-								<th width="15%">A</th>
-								<th width="15%">B</th>
-								<th width="15%">C</th>
-								<th width="15%">D</th>
-								<th width="15%">E</th>
-								<th width="15%">F</th>
+								<th width="20%">车位编号</th>
+								<th width="10%">A</th>
+								<th width="10%">B</th>
+								<th width="10%">C</th>
+								<th width="10%">D</th>
+								<th width="10%">E</th>
+								<th width="10%">F</th>
+								<th width="10%">G</th>
+								<th width="10%">H</th>
 							</tr>
 							<tr>
 								<td></td>
@@ -204,6 +214,8 @@
 								<td id="lot3">空</td>
 								<td id="lot4">有车</td>
 								<td id="lot5">空</td>
+								<td id="lot6">空</td>
+								<td id="lot7">空</td>
 							</tr>
 						</tbody>
 					</table>
@@ -316,7 +328,7 @@
 		<div style="padding-left:20px;padding-right:20px;">
 		<div class="form-group">
 			<label for="name">指令</label>
-			<input required name="ans" type="text" class="form-control" id="userans" placeholder="请输入指令">
+			<input oninput="nonote()" required name="ans" type="text" class="form-control" id="userans" placeholder="请输入指令">
 		</div>
 
 		<button onclick="pushToServer()" type="submit" class="btn btn-default">提交</button>
