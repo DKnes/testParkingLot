@@ -11,7 +11,7 @@
     $dataJson=json_decode($dataJson, true);
     //$dataJson=Array();
     // echo date('[Y-m-d H:i:s]',time());
-    array_unshift($dataJson, date('[Y-m-d H:i:s]', time()));
+    array_unshift($dataJson, Array(date('[Y-m-d H:i:s]', time()),(string)rand(0,9).(string)rand(0,9).(string)rand(0,9).(string)rand(0,9).(string)rand(0,9)));
     //$arr=[1,2,3];
     //echo var_dump($arr);
     $tmp=fopen($carCameDataFile, 'w');
