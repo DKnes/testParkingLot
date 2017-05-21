@@ -14,5 +14,5 @@
     $instruct=(string)$instructData->{(string)$freeLocation};
     $instruct.=",";
     $instruct.=(string)$instructData->{"t".((string)$freeLocation)};
-    echo $instruct;
+    echo $instruct."\n";
 ?>
